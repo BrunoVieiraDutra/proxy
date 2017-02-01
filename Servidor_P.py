@@ -31,7 +31,7 @@ def servidor_loop(host_local, porta_local,host_remoto ,porta_remota,primeiros_da
         #Imprimir as informacoes de conexao local
         print "[==>] Conexao recebida  de %s:%d" %(addr[0],addr[1])
 
-        #start a thread to talk to the remote host
+        #Iniciar um thread para falar com o host remoto
         proxy_thread = threading.Thread(target = p_handler.proxy_handler, args=(cliente_socket,host_remoto,porta_remota,primeiros_dados))
         proxy_thread.start()
 
