@@ -12,11 +12,11 @@ def proxy_handler(client_socket, host_remoto, porta_remota, primeiros_dados):
 
     #   Receber dados da extremidade remota se necessario
     if primeiros_dados:
-        remote_buffer = receive_from(remote_socket)
-        hexdump(remote_buffer)
+        remote_buffer = helpers.receive_from(remote_socket)
+        helpers.hexdump(remote_buffer)
 
         #  Envie para o nosso manipulador de resposta
-        remote_buffer = response_handler(remote_buffer)
+        remote_buffer = helpers.response_handler(remote_buffer)
 
         # Se tivermos dados para enviar para o nosso cliente local, os envie
         if len(remote_buffer):
@@ -30,28 +30,28 @@ def proxy_handler(client_socket, host_remoto, porta_remota, primeiros_dados):
     while True:
 
         # Ler do localhost
-        local_buffer = receive_from(cliente_socket)
+        local_buffer = helpers.receive_from(cliente_socket)
 
         if len(local_buffer):
             print "[==>] recebidos %d bytes do localhost." % len(local_buffer)
-            hexdump(local_buffer)
+            helpers.hexdump(local_buffer)
 
             # Envie para o nosso processador de pedidos
-            local_buffer = request_handler(local_buffer)
+            local_buffer = helpers.request_handler(local_buffer)
 
             # Enviar os dados para o host remoto
             remote_socket.send(local_buffer)
             print "[==>] Enviar para o hostremote."
 
         # Receber de volta a resposta
-        remote_buffer = receive_from(remote_socket)
+        remote_buffer = helpers.receive_from(remote_socket)
 
         if len(remote_buffer):
             print "[<==] Recebidos %d bytes do remote." % len(remote_buffer)
-            hexdump(remote_buffer)
+            helpers.hexdump(remote_buffer)
 
             # Envie para o nosso manipulador de resposta
-            remote_buffer = response_handler(remote_buffer)
+            remote_buffer = helpers.response_handler(remote_buffer)
 
             # Enviar a resposta para o socke local
 
