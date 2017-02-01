@@ -10,7 +10,7 @@ def main():
 
     if len(sys.argv[1:]) != 5:
         print "Modo de Uso: ./proxy.py [localhost] [portaLocal] [hostRemoto] [portaRemota] [primeiros_dados]"
-        print "Exemplo: ./proxy.py 127.0.0.1 9000 10.12.132.1 9000 True"
+        print "Exemplo: ./proxy.py 127.0.0.1 9000 <ip-alvo> 9000 True"
         sys.exit(0)
 
     #   Configuracao de parametros de escuta locais
